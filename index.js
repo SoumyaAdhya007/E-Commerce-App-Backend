@@ -4,7 +4,6 @@ require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const createUploadPreset = require("./Cloudinary/cloudinary-upload-preset");
 // Create an instance of the Express application
 const app = express();
 // Connect to the MongoDB database
