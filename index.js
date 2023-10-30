@@ -5,7 +5,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const swaggerJSdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
 const createUploadPreset = require("./Cloudinary/cloudinary-upload-preset");
 // Create an instance of the Express application
 const app = express();
@@ -36,11 +35,7 @@ app.use(cookieParser()); // Parse cookies from incoming requests
 app.get("/", async (req, res) => {
   res.send({ msg: "Welcome To E-Commerce API" });
 });
-// Rate limiting settings (you can customize these values as per your requirement)
 
-// Apply the rate limiter to all requests
-// app.use(limiter);
-// Serve the Swagger documentation using Swagger UI Express
 // Register different routers for specific routes
 app.use("/user", UserRouter); // User-related routes
 app.use("/category", CategoryRouter); // Category-related routes
@@ -48,25 +43,6 @@ app.use("/product", ProductRouter); // Product-related routes
 app.use("/cart", CartRouter); // Cart-related routes
 app.use("/payment", PaymentRouter); // Payment-related routes
 app.use("/order", OrdersRouter); // Order-related routes
-// app.use("/api", UploadRouter); // Order-related routes
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "E-Commerce API",
-      version: "1.0.0",
-    },
-    servers: [
-      {
-        url: "https://triveous-ecommerce-api.onrender.com",
-      },
-    ],
-  },
-  apis: ["./Routes/*.js"],
-};
-
-const swaggerSpec = swaggerJSdoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Start the server and listen on the specified port
 app.listen(process.env.PORT, async () => {
