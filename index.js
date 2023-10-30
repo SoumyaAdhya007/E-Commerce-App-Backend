@@ -23,15 +23,13 @@ const { PaymentRouter } = require("./Routes/payment.router");
 //   origin: "http://localhost:5173", // Replace with your frontend's origin
 //   credentials: true, // Allow credentials (cookies)
 // };
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://ecommerce-backend-lhio.onrender.com",
-    ],
-    credentials: true, // Allow credentials (cookies)
-  })
-);
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://ecommerce-backend-lhio.onrender.com",
+  ],
+  credentials: true, // Allow credentials (cookies)
+};
 app.use(cors(corsOptions)); // Enable CORS for cross-origin requests
 app.use(bodyParser.json({ limit: "1000mb" })); // Adjust the limit as needed
 app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));
